@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Consider adding a modern font like Inter or Lato from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Mi Empresa</h2> <!-- Placeholder for Logo/Brand -->
+            </div>
+            <nav class="main-nav" id="main-nav">
+                <ul>
+                    <li><a href="#" data-section="products" class="nav-link active">Productos</a></li>
+                    <li><a href="#" data-section="roles" class="nav-link">Roles</a></li>
+                    <li><a href="#" data-section="users" class="nav-link">Usuarios</a></li>
+                    <li><a href="#" data-section="customers" class="nav-link">Clientes</a></li>
+                    <li><a href="#" data-section="stores" class="nav-link">Tiendas</a></li>
+                    <li><a href="#" data-section="orders" class="nav-link">Pedidos</a></li>
+                    <!-- Add more sections as needed -->
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="logout-button" class="logout-button">Cerrar Sesión</button>
+            </div>
+        </aside>
+
+        <main class="content-area" id="content-area">
+            <!-- Content will be loaded here by app.js -->
+            <div class="loading-indicator">Cargando...</div> <!-- Initial loading state -->
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+
+    <!-- Modal de Edición de Producto (inicialmente oculto) -->
+    <div id="edit-product-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button" id="close-edit-modal">&times;</span>
+            <h2>Editar Producto</h2>
+            <form id="edit-product-form">
+                <input type="hidden" id="edit-product-id" name="id">
+                <div class="form-group">
+                    <label for="edit-product-name">Nombre:</label>
+                    <input type="text" id="edit-product-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-product-price">Precio:</label>
+                    <input type="number" step="0.01" id="edit-product-price" name="price" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-product-stock">Stock:</label>
+                    <input type="number" id="edit-product-stock" name="stock" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-product-store-id">ID Tienda:</label>
+                    <input type="text" id="edit-product-store-id" name="store_id" required>
+                </div>
+                <button type="submit" id="save-edit-button">Guardar Cambios</button>
+                <button type="button" id="cancel-edit-button" class="button-secondary">Cancelar</button>
+                <p id="edit-product-error" class="error"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Edición de Rol (inicialmente oculto) -->
+    <div id="edit-role-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button" id="close-edit-role-modal">&times;</span>
+            <h2>Editar Rol</h2>
+            <form id="edit-role-form">
+                <input type="hidden" id="edit-role-id" name="id">
+                <div class="form-group">
+                    <label for="edit-role-name">Nombre del Rol:</label>
+                    <input type="text" id="edit-role-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label>Permisos:</label>
+                    <div id="edit-role-permissions-container" class="permissions-container">
+                        <!-- Checkboxes de permisos se cargarán aquí -->
+                        <p>Cargando permisos...</p>
+                    </div>
+                </div>
+                <button type="submit" id="save-edit-role-button">Guardar Cambios</button>
+                <button type="button" id="cancel-edit-role-button" class="button-secondary">Cancelar</button>
+                <p id="edit-role-error" class="error"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Edición de Usuario (inicialmente oculto) -->
+    <div id="edit-user-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button" id="close-edit-user-modal">&times;</span>
+            <h2>Editar Usuario</h2>
+            <form id="edit-user-form">
+                <input type="hidden" id="edit-user-id" name="id">
+
+                <fieldset>
+                    <legend>Datos Básicos</legend>
+                    <div class="form-group">
+                        <label for="edit-user-name">Nombre:</label>
+                        <input type="text" id="edit-user-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-user-email">Email:</label>
+                        <input type="email" id="edit-user-email" name="email" required>
+                    </div>
+                     <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="edit-user-cross-store" name="cross_store_allowed">
+                            Permitir acceso multi-tienda
+                        </label>
+                    </div>
+                    <!-- Podríamos añadir opción para cambiar contraseña aquí si fuera necesario -->
+                    <button type="button" id="save-edit-user-button">Guardar Datos Básicos</button>
+                </fieldset>
+
+                <fieldset>
+                     <legend>Tiendas Asignadas</legend>
+                     <div class="form-group">
+                        <div class="multi-select-container">
+                            <div id="edit-user-stores-checkboxes" class="permission-grid">
+                                <p>Cargando tiendas...</p>
+                            </div>
+                        </div>
+                        <small>Seleccione las tiendas.</small>
+                    </div>
+                    <button type="button" id="save-user-stores-button">Actualizar Tiendas</button>
+                </fieldset>
+
+                 <fieldset>
+                     <legend>Roles Asignados</legend>
+                     <div class="form-group">
+                         <div class="multi-select-container">
+                            <div id="edit-user-roles-checkboxes" class="permission-grid">
+                                 <p>Cargando roles...</p>
+                            </div>
+                        </div>
+                         <small>Seleccione los roles.</small>
+                    </div>
+                    <button type="button" id="save-user-roles-button">Actualizar Roles</button>
+                 </fieldset>
+
+                <button type="button" id="cancel-edit-user-button" class="button-secondary">Cancelar Edición</button>
+                <p id="edit-user-error" class="error"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Edición de Tienda (inicialmente oculto) -->
+    <div id="edit-store-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button" id="close-edit-store-modal">&times;</span>
+            <h2>Editar Tienda</h2>
+            <form id="edit-store-form">
+                <input type="hidden" id="edit-store-id" name="id">
+                <div class="form-group">
+                    <label for="edit-store-name">Nombre:</label>
+                    <input type="text" id="edit-store-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-store-address">Dirección:</label>
+                    <input type="text" id="edit-store-address" name="address" required>
+                </div>
+                <button type="submit" id="save-edit-store-button">Guardar Cambios</button>
+                <button type="button" id="cancel-edit-store-button" class="button-secondary">Cancelar</button>
+                <p id="edit-store-error" class="error"></p>
+            </form>
+        </div>
+    </div>
+
+     <!-- Modal de Edición de Cliente (inicialmente oculto) -->
+    <div id="edit-customer-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button" id="close-edit-customer-modal">&times;</span>
+            <h2>Editar Cliente</h2>
+            <form id="edit-customer-form">
+                <input type="hidden" id="edit-customer-id" name="id">
+                <div class="form-group">
+                    <label for="edit-customer-name">Nombre:</label>
+                    <input type="text" id="edit-customer-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-customer-email">Email:</label>
+                    <input type="email" id="edit-customer-email" name="email" required>
+                </div>
+                 <div class="form-group">
+                    <label for="edit-customer-phone">Teléfono:</label>
+                    <input type="tel" id="edit-customer-phone" name="phone" required>
+                </div>
+                <!-- store_id no se puede editar según el endpoint PUT -->
+                <button type="submit" id="save-edit-customer-button">Guardar Cambios</button>
+                <button type="button" id="cancel-edit-customer-button" class="button-secondary">Cancelar</button>
+                <p id="edit-customer-error" class="error"></p>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
