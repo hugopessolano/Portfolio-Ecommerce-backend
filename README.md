@@ -14,3 +14,8 @@ Keep in mind that the current version is merely a base template I'm creating, wh
 * and more!
 
 Feel free to contact me regarding any questions or if you'd like to recommend changes and improvements. I'm always more than happy to recieve feedback!
+
+
+## _Disclaimer_
+_The frontend portion is entirely AI generated and it's only meant to become a tool to (in a very simple and unpolished manner) showcase how the backend could be used. 
+I'm not a fullstack dev, and, while i have limited frontend knowledge, it's neither my forte nor an area of expertise for me_
