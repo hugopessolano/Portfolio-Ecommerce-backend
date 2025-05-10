@@ -2,6 +2,9 @@
 
 This document provides instructions on how to set up, run, and manage the FastAPI e-commerce backend application using Docker and Docker Compose.
 
+## Deployed version:
+Swagger Docs: https://portfolio-ecommerce-backend-production.up.railway.app/docs#/
+
 ## Overview
 
 The application serves as the backend API for an e-commerce platform. It handles products, customers, orders, user authentication, roles, permissions, and more. It uses SQLite for its databases and Alembic for database migrations.
