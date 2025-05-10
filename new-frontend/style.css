@@ -1,0 +1,922 @@
+/***** GENERAL STYLES *****/
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #121212; /* Dark background */
+    color: #e0e0e0; /* Light text */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+button {
+    background-color: #bb86fc; /* Purple accent */
+    color: #121212;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #a052f0; /* Darker purple on hover */
+}
+
+/***** LOGIN CONTAINER *****/
+.login-container {
+    background-color: #1e1e1e; /* Slightly lighter dark background */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 350px;
+}
+
+.login-container h1 {
+    margin-bottom: 30px;
+    color: #ffffff;
+}
+
+/***** FORM ELEMENTS *****/
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #bbbbbb;
+    font-size: 0.9rem;
+}
+
+.input-group input[type="email"],
+.input-group input[type="password"] {
+    width: calc(100% - 20px); /* Account for padding */
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+    font-size: 1rem;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #bb86fc;
+    box-shadow: 0 0 5px rgba(187, 134, 252, 0.5);
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    font-size: 0.9rem;
+}
+
+.options label {
+    color: #bbbbbb;
+}
+
+.options input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/***** ERROR MESSAGE *****/
+.error-message {
+    background-color: #cf6679; /* Dark theme error color */
+    color: #121212;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    display: none; /* Hidden by default */
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.error-message.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/***** DASHBOARD CONTAINER *****/
+.dashboard-container {
+    background-color: #1e1e1e;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+.dashboard-container h1 {
+    color: #ffffff;
+}
+
+.dashboard-container p {
+    color: #bbbbbb;
+    margin-bottom: 20px;
+}
+
+/***** APP LAYOUT *****/
+html, body {
+    height: 100%; /* Ensure body takes full height */
+}
+
+body {
+    /* Modify body for app layout if different from login */
+    display: flex; /* Re-enable flex for login page, disable for app */
+    /* align-items: center; Already set */
+    /* justify-content: center; Already set */
+}
+
+.app-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    background-color: #121212; /* Ensure base dark background */
+}
+
+/***** SIDEBAR *****/
+.sidebar {
+    width: 240px;
+    background-color: #1e1e1e; /* Same as login box */
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    height: 100%;
+    position: fixed; /* Fix sidebar */
+    left: 0;
+    top: 0;
+}
+
+.sidebar-header {
+    padding: 0 20px 20px 20px;
+    text-align: center;
+    border-bottom: 1px solid #333;
+}
+
+.sidebar-header h2 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 1.4rem;
+}
+
+.sidebar-nav {
+    flex-grow: 1;
+    overflow-y: auto; /* Add scroll if needed */
+    margin-top: 20px;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li {
+    padding: 0;
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 12px 20px;
+    color: #bbbbbb;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active /* Style for active link later */ {
+    background-color: #2c2c2c; /* Slightly lighter background on hover/active */
+    color: #ffffff;
+}
+
+.sidebar-nav .separator {
+    height: 1px;
+    background-color: #333;
+    margin: 10px 20px;
+}
+
+/***** MAIN CONTENT AREA (includes topbar and content) *****/
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: 240px; /* Offset by sidebar width */
+    height: 100vh;
+}
+
+/***** TOP BAR *****/
+.topbar {
+    background-color: #1e1e1e; /* Match sidebar */
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid #333; /* Optional separator */
+    height: 60px; /* Fixed height */
+    box-sizing: border-box; /* Include padding in height */
+}
+
+.user-info span {
+    color: #e0e0e0;
+    margin-right: 20px;
+}
+
+/* Adjust logout button style if needed */
+.topbar #logout-button {
+    padding: 8px 15px; /* Slightly smaller */
+    font-size: 0.9rem;
+}
+
+/***** CONTENT AREA *****/
+.content-area {
+    flex-grow: 1;
+    padding: 30px;
+    overflow-y: auto; /* Allow content scrolling */
+    background-color: #121212; /* Base background */
+}
+
+.content-area h1 {
+    color: #ffffff;
+    margin-top: 0;
+}
+
+.content-area p {
+    color: #bbbbbb;
+    line-height: 1.6;
+}
+
+/***** Data Table Styles *****/
+.table-container {
+    overflow-x: auto; 
+    margin-top: 20px; /* Add space above table */
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    font-size: 0.9rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    border-radius: 5px; /* Optional: round corners */
+    overflow: hidden; /* Needed for border-radius */
+}
+
+.data-table th,
+.data-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #333; 
+}
+
+.data-table th {
+    background-color: #2c2c2c; 
+    color: #ffffff;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap; /* Prevent header text wrapping */
+}
+
+.data-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+.data-table tbody tr:hover {
+    background-color: #2a2a2a; /* Slightly lighter hover */
+}
+
+.data-table tbody tr:nth-child(odd) {
+     background-color: #212121; /* Subtle alternating row color */
+}
+.data-table tbody tr:nth-child(odd):hover {
+     background-color: #2f2f2f; /* Hover for odd rows */
+}
+
+.data-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.data-table td {
+    color: #bbbbbb;
+    vertical-align: middle; /* Align vertically */
+}
+
+/* Specific column styling */
+.data-table th.price,
+.data-table td.price,
+.data-table th.stock,
+.data-table td.stock {
+    text-align: right; /* Align numbers to the right */
+    white-space: nowrap;
+}
+
+.data-table th.actions,
+.data-table td.actions {
+    text-align: right; /* Align buttons to the right within the cell */
+    white-space: nowrap; /* Prevent wrapping */
+    display: flex; /* Use flexbox for alignment */
+    justify-content: flex-end; /* Align items to the end (right) */
+    align-items: center; /* Center items vertically */
+    gap: 0.5rem; /* Space between buttons */
+}
+
+/* Style for empty table message */
+.data-table td[colspan] {
+    text-align: center;
+    padding: 30px; /* More padding for empty message */
+    color: #888;
+    font-style: italic;
+}
+
+/* Ensure base styles apply to customer table too */
+.customers-table {
+    /* Inherits .data-table styles */
+    /* Add specific customer table overrides here if needed */
+}
+
+
+/* Copy ID button style */
+.copy-id-btn {
+    background-color: #444; /* Darker button */
+    color: #ccc;
+    border: 1px solid #555;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.copy-id-btn:hover {
+    background-color: #555;
+    color: #fff;
+    border-color: #777;
+}
+
+.copy-id-btn:disabled {
+    background-color: #bb86fc; /* Purple when copied */
+    color: #121212;
+    border-color: #bb86fc;
+    cursor: default;
+}
+
+/***** Pagination Controls *****/ 
+
+.filter-bar {
+    /* existing styles */
+    flex-basis: 60%; /* Give filter area more space */
+}
+
+/* --- Custom Multi-Select Dropdown Styles --- */
+
+#store-filter-container {
+    position: relative; /* Needed for absolute positioning of dropdown */
+    margin-bottom: 10px;
+}
+
+.multi-select-dropdown input[type="text"] {
+    width: calc(100% - 22px); /* Full width minus padding/border */
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.multi-select-dropdown input[type="text"]:focus {
+    border-color: #bb86fc;
+}
+
+.selected-stores-display {
+    display: none; /* Hide by default, show when items are selected */
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 5px 0;
+    margin-top: 5px;
+}
+
+.selected-store-pill {
+    background-color: #444;
+    color: #ccc;
+    padding: 3px 8px;
+    border-radius: 12px; /* Rounded pill shape */
+    font-size: 0.8rem;
+    display: inline-flex; /* Use flex for potential remove button */
+    align-items: center;
+    white-space: nowrap;
+}
+
+.selected-store-count {
+    font-size: 0.9rem;
+    color: #aaa;
+    padding: 5px 0;
+}
+
+/* Remove button inside pill (optional) */
+/*
+.remove-store-btn {
+    background: none;
+    border: none;
+    color: #aaa;
+    margin-left: 5px;
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+}
+.remove-store-btn:hover {
+    color: #fff;
+}
+*/
+
+.dropdown-content {
+    display: none; /* Hidden by default */
+    position: absolute;
+    background-color: #2c2c2c; /* Match input bg */
+    min-width: calc(100% - 2px); /* Match input width */
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
+    border: 1px solid #444;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    max-height: 250px; /* Limit height */
+    overflow-y: auto;
+    z-index: 10; /* Ensure it appears above other elements */
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+#store-filter-list {
+    padding: 5px 0;
+}
+
+.dropdown-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.dropdown-item label {
+    display: block; /* Make label take full width */
+    color: #e0e0e0;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #3e3e3e;
+}
+
+.dropdown-item input[type="checkbox"] {
+    margin-right: 10px;
+    vertical-align: middle;
+    accent-color: #bb86fc;
+    cursor: pointer;
+}
+
+/* Style for 'No hay tiendas' message */
+.dropdown-item:only-child {
+    font-style: italic;
+    color: #888;
+    cursor: default;
+    padding: 15px 12px;
+}
+.dropdown-item:only-child:hover {
+    background-color: transparent;
+}
+
+/* --- End Custom Dropdown Styles --- */
+
+.filter-actions {
+    /* styles */
+}
+.filter-button {
+   /* styles */
+}
+.filter-button.clear-button {
+    /* styles */
+}
+
+/* Table styles remain important */
+/* ... */
+
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 0;
+    gap: 5px;
+}
+
+#page-numbers {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin: 0 10px;
+}
+
+.page-number-btn {
+    background-color: #444;
+    color: #ccc;
+    border: 1px solid #555;
+    padding: 6px 12px;
+    min-width: 36px;
+    text-align: center;
+    font-size: 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.page-number-btn:hover {
+    background-color: #555;
+    color: #fff;
+    border-color: #777;
+}
+
+.page-number-btn.active {
+    background-color: #bb86fc;
+    color: #121212;
+    border-color: #bb86fc;
+    cursor: default;
+    font-weight: bold;
+}
+
+.page-ellipsis {
+    padding: 6px 4px;
+    color: #aaa;
+    cursor: default;
+}
+
+#page-info-container {
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    color: #aaa;
+}
+
+.pagination-controls button#prev-page-button,
+.pagination-controls button#next-page-button {
+     padding: 6px 15px;
+}
+.pagination-controls button:disabled {
+   background-color: #444;
+   color: #888;
+   cursor: not-allowed;
+   border-color: #555;
+}
+
+.view-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Align tops */
+    margin-bottom: 25px; /* More space below controls */
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* --- Styling the Filter Section --- */
+.store-filter-section {
+    background-color: #1e1e1e;
+    padding: 15px 20px;
+    border-radius: 6px; /* Slightly rounder */
+    border: 1px solid #333;
+    flex-basis: calc(60% - 10px);
+    min-width: 280px; /* Min width */
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Space between title and options */
+}
+
+.store-filter-section h3 {
+    margin: 0 0 5px 0; /* Less bottom margin */
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 500;
+    border-bottom: 1px solid #383838; /* Subtle separator */
+    padding-bottom: 8px;
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Styling the "All Stores" Checkbox and Label */
+#all-stores-checkbox {
+    appearance: none; /* Remove default */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #444;
+    border: 1px solid #555;
+    padding: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+#all-stores-checkbox:checked {
+    background-color: #bb86fc;
+    border-color: #bb86fc;
+}
+
+/* Checkmark style */
+#all-stores-checkbox:checked::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 2px;
+    width: 4px;
+    height: 8px;
+    border: solid #121212; /* Dark checkmark */
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+#all-stores-checkbox:hover {
+    border-color: #777;
+}
+#all-stores-checkbox:checked:hover {
+     border-color: #a052f0;
+     background-color: #a052f0;
+}
+
+/* Label for the checkbox */
+label[for="all-stores-checkbox"] {
+    color: #e0e0e0; /* Brighter label */
+    font-size: 0.95rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Styling the Single Store Selector Area */
+#single-store-selector-container {
+    /* display: none; controlled by JS */
+    padding-left: 5px; /* Indent slightly */
+    transition: opacity 0.3s ease;
+}
+
+#single-store-selector-container label {
+     color: #bbbbbb;
+     font-size: 0.9rem;
+     margin-right: 5px; /* Space before select */
+}
+
+#single-store-select {
+    /* Reset browser default */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    /* Custom Styles */
+    display: inline-block;
+    padding: 8px 30px 8px 12px; /* Space for arrow */
+    border-radius: 4px;
+    border: 1px solid #333;
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+    font-size: 0.9rem;
+    min-width: 220px;
+    cursor: pointer;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23AAAAAA%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); /* Simple grey arrow */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px auto;
+    transition: border-color 0.2s ease;
+}
+
+#single-store-select:hover {
+    border-color: #555;
+}
+
+#single-store-select:focus {
+    outline: none;
+    border-color: #bb86fc;
+    box-shadow: 0 0 3px rgba(187, 134, 252, 0.3);
+}
+
+#single-store-select:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    background-color: #252525;
+}
+
+/* --- End Filter Section Styles --- */
+
+/* Adjust Page Size Selector to align better */
+.page-size-selector {
+    flex-basis: calc(40% - 10px);
+    min-width: 200px; /* Min width */
+    text-align: right;
+    padding-top: 10px; /* Align label better if needed */
+}
+
+.page-size-selector label {
+    /* existing styles */
+}
+.page-size-selector select {
+     /* existing styles or apply similar styles as single-store-select */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    display: inline-block;
+    padding: 8px 30px 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #333;
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+    font-size: 0.9rem;
+    cursor: pointer;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23AAAAAA%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px auto;
+    transition: border-color 0.2s ease;
+}
+.page-size-selector select:hover {
+    border-color: #555;
+}
+.page-size-selector select:focus {
+    outline: none;
+    border-color: #bb86fc;
+    box-shadow: 0 0 3px rgba(187, 134, 252, 0.3);
+}
+
+/* --- Table Action Buttons --- */
+td.actions {
+    text-align: right; /* Align buttons to the right within the cell */
+    white-space: nowrap; /* Prevent wrapping */
+    display: flex; /* Use flexbox for alignment */
+    justify-content: flex-end; /* Align items to the end (right) */
+    align-items: center; /* Center items vertically */
+    gap: 0.5rem; /* Space between buttons */
+}
+
+.action-icon-btn {
+    background: none;
+    border: none;
+    padding: 4px; /* Small padding around the icon */
+    margin: 0;
+    cursor: pointer;
+    border-radius: 4px; /* Slight rounding */
+    display: inline-flex; /* Align icon correctly */
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    color: var(--text-secondary); /* Use a secondary text color for the icon */
+    /* Optional: Set a fixed size */
+    /* width: 30px; */
+    /* height: 30px; */
+}
+
+.action-icon-btn svg {
+    width: 18px; /* Control icon size */
+    height: 18px;
+    fill: currentColor; /* Use button's color for the icon */
+    display: block; /* Prevent extra space below icon */
+}
+
+.action-icon-btn:hover,
+.action-icon-btn:focus {
+    background-color: var(--background-light); /* Subtle background on hover/focus */
+    color: var(--text-primary); /* Make icon slightly brighter */
+    outline: none; /* Remove default focus outline if desired, ensure visibility */
+}
+
+.action-icon-btn:active {
+    transform: scale(0.95); /* Slight press effect */
+}
+
+/* Specific button adjustments if needed */
+.action-icon-btn.delete-btn:hover,
+.action-icon-btn.delete-btn:focus {
+    color: #f44336; /* Red color for delete action emphasis */
+    background-color: rgba(244, 67, 54, 0.1); /* Faint red background */
+}
+
+/* Style for the copy button after successful copy */
+.action-icon-btn.copied-success {
+    background-color: rgba(76, 175, 80, 0.15); /* Faint green background */
+    color: #4CAF50; /* Green color for success indication */
+    cursor: default; /* Indicate it's temporarily non-interactive */
+}
+
+/* Ensure the SVG inside the success button also gets the color */
+.action-icon-btn.copied-success svg {
+    fill: #4CAF50;
+}
+
+/* --- Styles for Inline Editing --- */
+tr.editing td {
+    padding-top: 8px;    /* Adjust padding for inputs */
+    padding-bottom: 8px;
+}
+
+tr.editing .edit-input {
+    width: calc(100% - 16px); /* Full width within cell padding */
+    padding: 6px 8px;
+    border: 1px solid #555; /* Visible border for editing */
+    background-color: #333; /* Darker input background */
+    color: #e0e0e0;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-family: inherit; /* Use table font */
+    box-sizing: border-box;
+}
+
+tr.editing td:first-child .edit-input {
+    /* Maybe slightly wider input for name */
+}
+
+tr.editing input.edit-price,
+tr.editing input.edit-stock {
+    text-align: right; /* Align numbers */
+}
+
+tr.editing select.edit-store {
+    /* Apply similar styles as other inputs */
+     appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: calc(100% - 16px);
+    padding: 6px 24px 6px 8px; /* Space for arrow */
+    border: 1px solid #555;
+    background-color: #333;
+    color: #e0e0e0;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    box-sizing: border-box;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23AAAAAA%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 8px auto;
+    cursor: pointer;
+}
+
+
+tr.editing .edit-input:focus {
+    outline: none;
+    border-color: #bb86fc; /* Highlight focus */
+    background-color: #3a3a3a;
+}
+
+/* Style Save/Cancel buttons */
+.action-icon-btn.save-btn:hover,
+.action-icon-btn.save-btn:focus {
+    color: #4CAF50; /* Green for save */
+    background-color: rgba(76, 175, 80, 0.1);
+}
+
+.action-icon-btn.cancel-btn:hover,
+.action-icon-btn.cancel-btn:focus {
+    color: #ff9800; /* Orange/Amber for cancel */
+    background-color: rgba(255, 152, 0, 0.1);
+}
+
+/* --- Footer --- */
+/* ... (existing footer styles) ... */
+
+/* ... (rest of the existing styles) ... */
+
+/***** TABLE SORTING *****/
+th[data-sort-key] {
+    cursor: pointer;
+    user-select: none; /* Prevent text selection on click */
+}
+th[data-sort-key]:hover {
+    background-color: #2c2c2c; /* Slightly lighter background on hover */
+}
+th[data-sort-key].sorted {
+    /* Optional: Add distinct style for the currently sorted column header */
+    background-color: #3a3a3a;
+}
+.sort-indicator {
+    font-size: 0.8em;
+    display: inline-block; /* Prevent line breaks */
+    width: 1em; /* Ensure space for indicator */
+    text-align: center;
+}

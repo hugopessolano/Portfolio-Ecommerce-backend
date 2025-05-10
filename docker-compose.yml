@@ -1,0 +1,11 @@
+# docker-compose.yml
+# para correr 1º vez: docker-compose up --build
+# para correr a partir de esa: docker-compose up
+# para bajar docker-compose down
+services:
+  api: 
+    build: .
+    container_name: ecommerce_backend_fastapi
+    ports:
+      - "8000:8000"
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload --workers 1

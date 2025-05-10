@@ -1,0 +1,113 @@
+# Archivos específicos del sistema operativo
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Archivos de configuración de editores e IDEs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln.docstates
+
+# Archivos de Vim
+*.swp
+*.swo
+*~
+
+# Archivos de compilación y empaquetado
+build/
+dist/
+out/
+target/
+bin/
+obj/
+
+# Archivos generados
+*.o
+*.a
+*.lib
+*.so
+*.dll
+*.exe
+*.class
+*.jar
+*.war
+*.ear
+
+# Dependencias
+node_modules/
+jspm_packages/
+bower_components/
+vendor/
+
+# Archivos de logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Archivos de entorno
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Archivos temporales
+*.tmp
+*.temp
+*.bak
+*.old
+
+# Cobertura de pruebas
+coverage/
+*.lcov
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+pip-freeze.txt
+
+# Java
+*.class
+hs_err_pid*
+
+# Maven
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# Gradle
+.gradle
+build/
+
+# Sass
+.sass-cache/
+
+# Archivos de caché de macOS
+.AppleDouble
+
+# Archivos de Windows
+*NTUSER.DAT*
+ntuser.ini
+
+# Archivos de base de datos SQLite específicos de la aplicación
+app/app.db
+app/mi_aplicacion_logs.db
+
+# Extensiones comunes de archivos SQLite
+*.sqlite
+*.sqlite3

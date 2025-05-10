@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - E-commerce Admin</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Consider adding an icon library like Font Awesome later -->
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Admin Panel</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#products">[Icon] Productos</a></li>
+                    <li><a href="#customers">[Icon] Clientes</a></li> 
+                    <li><a href="#orders">[Icon] Órdenes</a></li>
+                    <li><a href="#stores">[Icon] Tiendas</a></li>
+                    <li class="separator"></li>
+                    <li><a href="#users">[Icon] Usuarios</a></li>
+                    <li><a href="#roles">[Icon] Roles</a></li>
+                    <li><a href="#permissions">[Icon] Permisos</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="main-content">
+            <header class="topbar">
+                <div class="user-info">
+                    <span>Bienvenido, [Nombre Usuario]</span>
+                    </div>
+                <button id="logout-button">Cerrar Sesión</button>
+            </header>
+
+            <main class="content-area">
+                <h1>Panel Principal</h1>
+                <p>Selecciona una opción de la barra lateral para empezar.</p>
+                <!-- Content for selected section will be loaded here later -->
+            </main>
+
+            <!-- Sections for dynamic content -->
+            <section id="products-section" class="content-section">
+                <!-- Product content will be loaded here by script.js -->
+            </section>
+
+            <section id="customers-section" class="content-section">
+                <!-- Customer content will be loaded here by script.js -->
+            </section>
+
+            <section id="orders-section" class="content-section" style="display: none;">
+                <h2>Gestión de Órdenes</h2>
+                <p>Contenido de órdenes cargado aquí.</p>
+                <!-- Order table and controls will be added here by script.js -->
+            </section>
+
+            <section id="stores-section" class="content-section" style="display: none;">
+                <h2>Gestión de Tiendas</h2>
+                <p>Contenido de tiendas cargado aquí.</p>
+                <!-- Store table and controls will be added here by script.js -->
+            </section>
+
+        </div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
