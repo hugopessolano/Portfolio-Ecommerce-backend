@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException, Query, Request, Response
 from sqlalchemy.orm import Session
 from app.database.database import get_db
-from app.database.models import Stores, Users, UserStores
+from app.database.models import Stores, Users, UserStores, Roles, UserRoles, RolePermissions
 from app.schemas.stores_schemas import BaseStore, StoreCreate, StoreUpdate
 from app.routers.utils import filter_by_store, calculate_next_and_last_pages, order_by_parameter
 from app.auth.oauth2 import get_current_user
@@ -93,5 +93,16 @@ async def delete_store(store_id: str,
     if not existing_store:
         raise HTTPException(status_code=404, detail="Store not found")
     
+    db.query(UserStores).filter(UserStores.store_id == store_id).delete(synchronize_session=False)
+    
+    roles_in_store_subquery = db.query(Roles.id).filter(Roles.store_id == store_id).scalar_subquery()
+    
+    db.query(UserRoles).filter(UserRoles.role_id.in_(roles_in_store_subquery)).delete(synchronize_session=False)
+        
+    db.query(RolePermissions).filter(RolePermissions.role_id.in_(roles_in_store_subquery)).delete(synchronize_session=False)
+        
+    db.query(Roles).filter(Roles.store_id == store_id).delete(synchronize_session=False)
+
+
     db.delete(existing_store)
     db.commit()
