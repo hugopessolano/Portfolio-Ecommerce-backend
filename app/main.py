@@ -43,6 +43,6 @@ initialize_database()
 
 @app.get("/")
 async def root():
-    return {"message": "Hello World"}
+    return {"message": "Service Running"}
 
 
